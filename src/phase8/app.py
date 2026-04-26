@@ -124,7 +124,7 @@ def _render_preferences_form(cities: list[str], all_cuisines: list[str]) -> dict
         with col2:
             minimum_rating = st.select_slider(
                 "Minimum Rating",
-                options=[0.0, 1.0, 2.0, 3.0, 4.0, 5.0],
+                options=[round(x * 0.1, 1) for x in range(0, 51)],
                 value=0.0,
                 help="Filter restaurants with rating at least this value.",
             )
