@@ -1,0 +1,33 @@
+# Environment variables & secrets
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Frontend dependencies & build
+frontend/node_modules/
+frontend/dist/
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Test cache
+.pytest_cache/
+.coverage
+
+# Streamlit secrets (if used locally)
+.streamlit/secrets.toml
