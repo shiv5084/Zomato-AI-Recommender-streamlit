@@ -205,9 +205,18 @@ def test_build_prompt_payload(sample_restaurants):
 def test_build_integration_output(sample_restaurants):
     prefs = UserPreferences(location="new delhi", budget_band="low")
     result = build_integration_output(sample_restaurants, prefs)
-    
+
     assert "candidates" in result
-    assert len(result["candidates"]) == 1
-    
+    # Only 1 restaurant matches "low" budget in New Delhi;
+    # pipeline pads with supplemental highly-rated candidates to reach min 5.
+    assert len(result["candidates"]) == 5
+
+    # First candidate should be the strict rule-based match
+    assert result["candidates"][0].name == "Cheap Delhi Bites"
+
+    # Ensure no duplicates by restaurant_id across filtered + supplemental
+    ids = [c.restaurant_id for c in result["candidates"]]
+    assert len(ids) == len(set(ids))
+
     assert "prompt_payload" in result
     assert "messages" in result["prompt_payload"]
