@@ -137,14 +137,22 @@ def _render_preferences_form(cities: list[str], all_cuisines: list[str]) -> dict
         )
 
         # Row 3: Budget Band as elegant cards
-        st.markdown("<p style='margin-bottom:0.3rem; font-size:0.9rem; color:#666;'>Budget Band</p>", unsafe_allow_html=True)
-        budget_band = st.radio(
+        st.markdown(
+            "<p style='margin-bottom:0.3rem; font-size:0.9rem; opacity:0.8;'>Budget Band</p>",
+            unsafe_allow_html=True,
+        )
+        budget_options_map = {
+            "Low\n₹0 – ₹500": "low",
+            "Medium\n₹501 – ₹1500": "medium",
+            "High\n₹1501+": "high",
+        }
+        budget_display = st.radio(
             "Budget Band",
-            options=["low", "medium", "high"],
+            options=list(budget_options_map.keys()),
             horizontal=True,
-            help="Low: ≤ ₹500 | Medium: ₹501–₹1500 | High: > ₹1500 (for two people)",
             label_visibility="collapsed",
         )
+        budget_band = budget_options_map[budget_display]
 
         # Row 4: Additional Preferences
         additional_preferences = st.text_area(
@@ -472,6 +480,25 @@ def main() -> None:
             transform: translateY(-2px) !important;
         }
 
+        /* Dark mode overrides for Budget Band cards */
+        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label {
+            background: #1e1e1e !important;
+            border-color: #444444 !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+        }
+        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label:hover {
+            border-color: #FFA500 !important;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3) !important;
+        }
+        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
+            background: #3d2e00 !important;
+            border-color: #FF6F00 !important;
+            box-shadow: 0 4px 12px rgba(255, 111, 0, 0.25) !important;
+        }
+        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label span {
+            color: #e0e0e0 !important;
+        }
+
         /* Colored accent bars per budget card */
         [data-testid="stRadio"] > div[role="radiogroup"] > label:nth-child(1)::before {
             content: "" !important;
@@ -503,6 +530,8 @@ def main() -> None:
             font-weight: 600 !important;
             font-size: 0.95rem !important;
             text-transform: capitalize !important;
+            white-space: pre-line !important;
+            line-height: 1.3 !important;
         }
 
         /* ── Form inputs focus glow ── */
@@ -570,6 +599,29 @@ def main() -> None:
             line-height: 1.5;
             padding-left: 0.7rem;
             border-left: 3px solid #FFA500;
+        }
+
+        /* Dark mode overrides for result cards */
+        [data-theme="dark"] .rec-card {
+            background: #1e1e1e;
+            border-color: #444444;
+        }
+        [data-theme="dark"] .rec-card:hover {
+            border-color: #FF6F00;
+        }
+        [data-theme="dark"] .rec-card-title {
+            color: #e0e0e0;
+        }
+        [data-theme="dark"] .rec-card-badge {
+            color: #aaa;
+            background: #333333;
+        }
+        [data-theme="dark"] .rec-card-meta {
+            color: #aaa;
+        }
+        [data-theme="dark"] .rec-card-explanation {
+            color: #ccc;
+            border-left-color: #FF6F00;
         }
 
         /* ── Metric cards micro-interaction ── */
