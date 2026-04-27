@@ -459,8 +459,8 @@ def main() -> None:
             min-width: 100px !important;
             padding: 1rem 0.5rem !important;
             border-radius: 12px !important;
-            border: 2px solid #e8e8e8 !important;
-            background: #ffffff !important;
+            border: 2px solid rgba(128,128,128,0.25) !important;
+            background: var(--secondary-background-color, #ffffff) !important;
             cursor: pointer !important;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
             text-align: center !important;
@@ -474,29 +474,13 @@ def main() -> None:
             border-color: #FFA500 !important;
         }
         [data-testid="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            background: #FFF8E1 !important;
+            background: rgba(255, 111, 0, 0.15) !important;
             border-color: #FF6F00 !important;
             box-shadow: 0 4px 12px rgba(255, 111, 0, 0.2) !important;
             transform: translateY(-2px) !important;
         }
-
-        /* Dark mode overrides for Budget Band cards */
-        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label {
-            background: #1e1e1e !important;
-            border-color: #444444 !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
-        }
-        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label:hover {
-            border-color: #FFA500 !important;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.3) !important;
-        }
-        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            background: #3d2e00 !important;
-            border-color: #FF6F00 !important;
-            box-shadow: 0 4px 12px rgba(255, 111, 0, 0.25) !important;
-        }
-        [data-theme="dark"] [data-testid="stRadio"] > div[role="radiogroup"] > label span {
-            color: #e0e0e0 !important;
+        [data-testid="stRadio"] > div[role="radiogroup"] > label span {
+            color: var(--text-color, #1a1a1a) !important;
         }
 
         /* Colored accent bars per budget card */
@@ -553,8 +537,8 @@ def main() -> None:
             to   { opacity: 1; transform: translateY(0); }
         }
         .rec-card {
-            background: #ffffff;
-            border: 1px solid #e8e8e8;
+            background: var(--secondary-background-color, #ffffff);
+            border: 1px solid rgba(128,128,128,0.25);
             border-radius: 14px;
             padding: 1.1rem 1.3rem;
             margin-bottom: 1rem;
@@ -577,51 +561,29 @@ def main() -> None:
         .rec-card-title {
             font-weight: 700;
             font-size: 1.05rem;
-            color: #1a1a1a;
+            color: var(--text-color, #1a1a1a);
         }
         .rec-card-badge {
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: capitalize;
-            color: #888;
-            background: #f5f5f5;
+            color: var(--text-color, #888);
+            background: rgba(128,128,128,0.15);
             padding: 0.2rem 0.6rem;
             border-radius: 20px;
         }
         .rec-card-meta {
             font-size: 0.85rem;
-            color: #666;
+            color: var(--text-color, #666);
+            opacity: 0.75;
             margin-bottom: 0.6rem;
         }
         .rec-card-explanation {
             font-size: 0.92rem;
-            color: #444;
+            color: var(--text-color, #444);
             line-height: 1.5;
             padding-left: 0.7rem;
             border-left: 3px solid #FFA500;
-        }
-
-        /* Dark mode overrides for result cards */
-        [data-theme="dark"] .rec-card {
-            background: #1e1e1e;
-            border-color: #444444;
-        }
-        [data-theme="dark"] .rec-card:hover {
-            border-color: #FF6F00;
-        }
-        [data-theme="dark"] .rec-card-title {
-            color: #e0e0e0;
-        }
-        [data-theme="dark"] .rec-card-badge {
-            color: #aaa;
-            background: #333333;
-        }
-        [data-theme="dark"] .rec-card-meta {
-            color: #aaa;
-        }
-        [data-theme="dark"] .rec-card-explanation {
-            color: #ccc;
-            border-left-color: #FF6F00;
         }
 
         /* ── Metric cards micro-interaction ── */
