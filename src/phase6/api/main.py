@@ -1,6 +1,7 @@
 """FastAPI application entry point for Phase 6 Backend API Service."""
 
 import logging
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -27,15 +28,21 @@ app = FastAPI(
     version="0.1.0",
 )
 
-# CORS: allow local frontend dev servers
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+# CORS: allow local frontend dev servers, and read from environment variable
+cors_origins_env = os.environ.get("CORS_ORIGINS", "")
+if cors_origins_env:
+    allow_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+else:
+    allow_origins = [
         "http://localhost:3000",
         "http://localhost:5173",
         "http://127.0.0.1:3000",
         "http://127.0.0.1:5173",
-    ],
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
