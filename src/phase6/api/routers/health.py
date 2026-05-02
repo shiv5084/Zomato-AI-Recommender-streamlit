@@ -8,7 +8,7 @@ from phase6.api.service import is_groq_configured
 router = APIRouter(tags=["health"])
 
 
-@router.get("/api/v1/health", response_model=HealthResponse)
+@router.get("/health", response_model=HealthResponse)
 def health_check() -> HealthResponse:
     """Return API health status and whether required secrets are configured."""
     return HealthResponse(

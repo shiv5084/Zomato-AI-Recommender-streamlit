@@ -18,7 +18,7 @@ class FakeRecommendationResult:
 
 def test_health_endpoint():
     with patch("phase6.api.routers.health.is_groq_configured", return_value=True):
-        response = client.get("/api/v1/health")
+        response = client.get("/health")
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "ok"
@@ -27,7 +27,7 @@ def test_health_endpoint():
 
 def test_health_endpoint_missing_key():
     with patch("phase6.api.routers.health.is_groq_configured", return_value=False):
-        response = client.get("/api/v1/health")
+        response = client.get("/health")
     assert response.status_code == 200
     data = response.json()
     assert data["groq_configured"] is False
