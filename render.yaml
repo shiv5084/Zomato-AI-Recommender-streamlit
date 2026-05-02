@@ -1,11 +1,12 @@
 services:
   - type: web
-    name: zomato-ai-backend
+    name: Zomato-AI-Recommender-backend
     env: python
+    plan: free
     region: oregon # Or your preferred Render region
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn src.phase6.api.main:app --host 0.0.0.0 --port $PORT
-    healthCheckPath: /health
+    startCommand: PYTHONPATH=src python -m uvicorn phase6.api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.8 # Make sure this matches your project's Python version

@@ -27,8 +27,8 @@ We have included a `render.yaml` Infrastructure-as-Code file in the repository r
    - **Branch**: `main`
    - **Root Directory**: Leave blank (root of the repo)
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `uvicorn src.phase6.api.main:app --host 0.0.0.0 --port $PORT`
-   - **Health Check Path**: /health
+   - **Start Command**: `PYTHONPATH=src python -m uvicorn phase6.api.main:app --host 0.0.0.0 --port $PORT`
+   - **Health Check Path**: `/api/v1/health`
 4. Set Environment Variables:
    - `GROQ_API_KEY`: Your Groq API key
    - Any other required keys.
